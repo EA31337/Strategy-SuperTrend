@@ -1,0 +1,29 @@
+/**
+ * @file
+ * Defines default strategy parameter values for the given timeframe.
+ */
+
+// Defines indicator's parameter values for the given pair symbol and timeframe.
+struct Indi_Demo_Params_{{ Timeframe }} : DemoIndiParams {
+  Indi_Demo_Params_{{ Timeframe }}() : DemoIndiParams(indi_demo_defaults, PERIOD_{{ Timeframe }}) {
+    shift = {{ Demo_Indi_Demo_Shift | default(0) }};
+  }
+} indi_demo_{{ Timeframe | lower }};
+
+// Defines strategy's parameter values for the given pair symbol and timeframe.
+struct Stg_Demo_Params_{{ Timeframe }} : StgParams {
+  // Struct constructor.
+  Stg_Demo_Params_{{ Timeframe }}() : StgParams(stg_demo_defaults) {
+    lot_size = {{ Demo_LotSize | default(0) }};
+    signal_open_method = {{ Demo_SignalOpenMethod | default(0) }};
+    signal_open_filter_method = {{ Demo_SignalOpenFilterMethod | default(1) }};
+    signal_open_level = (float){{ Demo_SignalOpenLevel | default(0) }};
+    signal_open_boost = {{ Demo_SignalOpenBoostMethod | default(0) }};
+    signal_close_method = {{ Demo_SignalCloseMethod | default(0) }};
+    signal_close_level = (float){{ Demo_SignalCloseLevel | default(0) }};
+    price_stop_method = {{ Demo_PriceStopMethod | default(0) }};
+    price_stop_level = (float){{ Demo_SignalCloseLevel | default(1) }};
+    tick_filter_method = {{ Demo_TickFilterMethod  | default(1) }};
+    max_spread = {{ Demo_MaxSpread | default(0) }};
+  }
+} stg_demo_{{ Timeframe | lower }};

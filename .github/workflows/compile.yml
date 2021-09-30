@@ -1,0 +1,56 @@
+---
+name: Compile
+
+# yamllint disable-line rule:truthy
+on:
+  pull_request:
+    branches:
+      - 'master'
+      - 'dev*'
+    paths-ignore:
+      - '*.md'
+      - '.git*'
+  push:
+    branches:
+      - 'master'
+      - 'dev*'
+    paths-ignore:
+      - '*.md'
+      - '.git*'
+
+jobs:
+  Compile:
+    defaults:
+      run:
+        shell: powershell
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          path: Include/EA31337-classes
+          ref: master
+          repository: EA31337/EA31337-classes
+      - name: Compile for MQL4
+        uses: fx31337/mql-compile-action@master
+        with:
+          include: .
+          init-platform: true
+          mt-version: 5.0.0.2361
+          path: Stg_Demo.mq4
+          verbose: true
+      - name: Compile for MQL5
+        uses: fx31337/mql-compile-action@master
+        with:
+          include: .
+          mt-version: 5.0.0.2515
+          path: Stg_Demo.mq5
+          verbose: true
+      - name: List compiled files
+        run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
+      - run: Get-Location
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: EA
+          path: '*.ex?'
