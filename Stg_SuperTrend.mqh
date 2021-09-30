@@ -37,8 +37,9 @@ INPUT ENUM_IDATA_SOURCE_TYPE SuperTrend_Indi_SuperTrend_SourceType = IDATA_INDIC
 // Defines struct with default user indicator values.
 struct IndiSuperTrendParams_Defaults : IndiSuperTrendParams {
   IndiSuperTrendParams_Defaults()
-      : IndiSuperTrendParams(::SuperTrend_Indi_SuperTrend_Shift, PERIOD_CURRENT,
-                             ::SuperTrend_Indi_SuperTrend_SourceType) {}
+      : IndiSuperTrendParams(::SuperTrend_Indi_SuperTrend_InpPeriod, ::SuperTrend_Indi_SuperTrend_InpShift,
+                             ::SuperTrend_Indi_SuperTrend_InpUseFilter, ::SuperTrend_Indi_SuperTrend_Shift,
+                             PERIOD_CURRENT, ::SuperTrend_Indi_SuperTrend_SourceType) {}
 };
 
 // Defines struct with default user strategy values.

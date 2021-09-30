@@ -32,9 +32,10 @@ struct IndiSuperTrendParams : public IndicatorParams {
   uint InpShift;      // Shift
   bool InpUseFilter;  // Use filter
   // Struct constructors.
-  IndiSuperTrendParams(uint _period = 14, uint _inp_shift = 20, bool _use_filter = 1, int _shift = 0)
+  IndiSuperTrendParams(uint _period = 14, uint _inp_shift = 20, bool _use_filter = 1, int _shift = 0,
+                       ENUM_TIMEFRAMES _tf = PERIOD_CURRENT, ENUM_IDATA_SOURCE_TYPE _idstype = IDATA_BUILTIN)
       : InpPeriod(_period), InpShift(_inp_shift), InpUseFilter(_use_filter) {
-    max_modes = FINAL_SUPERTREND_MODE_ENTRY;
+    max_modes = 2;
 #ifdef __resource__
     custom_indi_name = "::Indicators\\SuperTrend";
 #else
@@ -75,7 +76,7 @@ class Indi_SuperTrend : public Indicator {
    * Returns the indicator's value.
    *
    */
-  double GetValue(ENUM_SUPERTREND_MODE _mode, int _shift = 0) {
+  double GetValue(uint _mode, int _shift = 0) {
     ResetLastError();
     double _value = EMPTY_VALUE;
     switch (params.idstype) {
@@ -104,12 +105,10 @@ class Indi_SuperTrend : public Indicator {
       _entry = idata.GetByPos(_position);
     } else {
       _entry.timestamp = GetBarTime(_shift);
-      for (ENUM_SUPERTREND_MODE _mode = 0; _mode < FINAL_SUPERTREND_MODE_ENTRY; _mode++) {
+      for (uint _mode = 0; _mode < (uint)params.GetMaxModes(); _mode++) {
         _entry.values[_mode] = GetValue(_mode, _shift);
       }
-      _entry.SetFlag(
-          INDI_ENTRY_FLAG_IS_VALID,
-          _entry.GetMin<double>() > 0 && _entry.values[SUPERTREND_UPPER].IsGt<double>(_entry[(int)SUPERTREND_LOWER]));
+      _entry.SetFlag(INDI_ENTRY_FLAG_IS_VALID, _entry.GetMin<double>() > 0);
       if (_entry.IsValid()) {
         idata.Add(_entry, _bar_time);
       }
