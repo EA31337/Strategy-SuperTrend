@@ -1,4 +1,4 @@
-# Strategy Demo
+# Strategy SuperTrend
 
 [![Status][gha-image-check-master]][gha-link-check-master]
 [![Status][gha-image-compile-master]][gha-link-compile-master]
@@ -6,9 +6,7 @@
 [![Discuss][gh-discuss-badge]][gh-discuss-link]
 [![License][license-image]][license-link]
 
-Strategy based on the Demo indicator.
-
-This is example demo strategy for the demonstration purposes.
+Strategy based on the SuperTrend indicator.
 
 ## Dependencies
 
@@ -28,10 +26,10 @@ This is example demo strategy for the demonstration purposes.
 [gh-discuss-badge]: https://img.shields.io/badge/Discussions-Q&A-blue.svg?logo=github
 [gh-discuss-link]: https://github.com/EA31337/EA31337-Strategies/discussions
 
-[gha-link-check-master]: https://github.com/EA31337/Strategy-Demo/actions?query=workflow:Check+branch%3Amaster
-[gha-image-check-master]: https://github.com/EA31337/Strategy-Demo/workflows/Check/badge.svg?branch=master
-[gha-link-compile-master]: https://github.com/EA31337/Strategy-Demo/actions?query=workflow:Compile+branch%3Amaster
-[gha-image-compile-master]: https://github.com/EA31337/Strategy-Demo/workflows/Compile/badge.svg?branch=master
+[gha-link-check-master]: https://github.com/EA31337/Strategy-SuperTrend/actions?query=workflow:Check+branch%3Amaster
+[gha-image-check-master]: https://github.com/EA31337/Strategy-SuperTrend/workflows/Check/badge.svg?branch=master
+[gha-link-compile-master]: https://github.com/EA31337/Strategy-SuperTrend/actions?query=workflow:Compile+branch%3Amaster
+[gha-image-compile-master]: https://github.com/EA31337/Strategy-SuperTrend/workflows/Compile/badge.svg?branch=master
 
 [tg-channel-image]: https://img.shields.io/badge/Telegram-join-0088CC.svg?logo=telegram
 [tg-channel-link]: https://t.me/EA31337

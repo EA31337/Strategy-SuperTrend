@@ -35,14 +35,14 @@ jobs:
           include: .
           init-platform: true
           mt-version: 5.0.0.2361
-          path: Stg_Demo.mq4
+          path: Stg_SuperTrend.mq4
           verbose: true
       - name: Compile for MQL5
         uses: fx31337/mql-compile-action@master
         with:
           include: .
           mt-version: 5.0.0.2515
-          path: Stg_Demo.mq5
+          path: Stg_SuperTrend.mq5
           verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
@@ -73,7 +73,7 @@ jobs:
           OptFormatBrief: true
           OptFormatJson: true
           OptVerbose: true
-          TestExpert: "Stg_Demo"
+          TestExpert: "Stg_SuperTrend"
           TestPeriod: M1
           TestReportName: Report-${{ matrix.year }}-${{ matrix.month }}
       - name: Upload results

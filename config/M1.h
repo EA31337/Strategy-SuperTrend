@@ -4,12 +4,12 @@
  */
 
 // Defines indicator's parameter values for the given pair symbol and timeframe.
-struct Indi_Demo_Params_M1 : DemoIndiParams {
-  Indi_Demo_Params_M1() : DemoIndiParams(indi_demo_defaults, PERIOD_M1) { shift = 0; }
-} indi_demo_m1;
+struct IndiSuperTrendParams_M1 : IndiSuperTrendParams {
+  IndiSuperTrendParams_M1() : IndiSuperTrendParams(indi_supertrend_defaults, PERIOD_M1) { shift = 0; }
+} indi_supertrend_m1;
 
 // Defines strategy's parameter values for the given pair symbol and timeframe.
-struct Stg_Demo_Params_M1 : StgParams {
+struct Stg_SuperTrend_Params_M1 : StgParams {
   // Struct constructor.
-  Stg_Demo_Params_M1() : StgParams(stg_demo_defaults) {}
-} stg_demo_m1;
+  Stg_SuperTrend_Params_M1() : StgParams(stg_supertrend_defaults) {}
+} stg_supertrend_m1;
