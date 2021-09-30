@@ -87,11 +87,11 @@ class Stg_SuperTrend : public Strategy {
                              stg_supertrend_m30, stg_supertrend_h1, stg_supertrend_h4, stg_supertrend_h8);
 #endif
     // Initialize indicator.
-    _stg_params.SetIndicator(new Indi_SuperTrend(_indi_params));
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_SuperTrend(_stg_params, _tparams, _cparams, "SuperTrend");
+    _strat.SetIndicator(new Indi_SuperTrend(_indi_params));
     return _strat;
   }
 
