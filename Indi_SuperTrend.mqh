@@ -23,14 +23,6 @@
 #ifndef INDI_SUPERTREND_MQH
 #define INDI_SUPERTREND_MQH
 
-// Indicator line identifiers used in the indicator.
-enum ENUM_SUPERTREND_MODE {
-  SUPERTREND_MAIN = 0,   // Main line.
-  SUPERTREND_UPPER = 1,  // Upper limit.
-  SUPERTREND_LOWER = 2,  // Lower limit.
-  FINAL_SUPERTREND_MODE_ENTRY,
-};
-
 // Structs.
 
 // Defines struct to store indicator parameter values.
@@ -78,12 +70,6 @@ class Indi_SuperTrend : public Indicator {
    * Class constructor.
    */
   Indi_SuperTrend(IndiSuperTrendParams &_p) : Indicator((IndicatorParams)_p) {}
-  // Indi_SuperTrend(ENUM_TIMEFRAMES _tf) : Indicator(IND_CUSTOM, _tf) {}
-
-  /**
-   * Gets indicator's params.
-   */
-  // IndiSuperTrendParams GetIndiParams() const { return params; }
 
   /**
    * Returns the indicator's value.
