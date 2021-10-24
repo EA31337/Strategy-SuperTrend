@@ -20,7 +20,7 @@ input bool Info_On_Chart = true;          // Display info on chart.
 
 // Defines.
 #define ea_name "Strategy SuperTrend"
-#define ea_version "1.007"
+#define ea_version "1.008"
 #define ea_desc "Strategy based on EA31337 framework."
 #define ea_link "https://github.com/EA31337/Strategy-SuperTrend"
 #define ea_author "EA31337 Ltd"
@@ -33,6 +33,19 @@ input bool Info_On_Chart = true;          // Display info on chart.
 #endif
 #property link ea_link
 #property copyright "Copyright 2016-2021, EA31337 Ltd"
+#ifdef __resource__
+#ifdef __MQL5__
+#property tester_indicator "::Indicators\\SuperTrend.ex5"
+#property tester_library "::Indicators\\SuperTrend.ex5"
+#endif
+#endif
+
+// Load external resources.
+#ifdef __resource__
+#ifdef __MQL5__
+#resource "Indicators\\SuperTrend.ex5"
+#endif
+#endif
 
 // Class variables.
 EA *ea;

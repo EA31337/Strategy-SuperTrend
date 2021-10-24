@@ -31,9 +31,13 @@ jobs:
           path: Include/EA31337-classes
           ref: dev
           repository: EA31337/EA31337-classes
-      - name: Enables resource mode
-        if: false
-        run: echo "#define __resource__" >> config/define.h
+      - uses: actions/checkout@v2
+        with:
+          path: Indicators/Include/EA31337-classes
+          ref: dev
+          repository: EA31337/EA31337-classes
+      - name: Enables input mode
+        run: echo '#define __input__' > config/define.h
       - name: Compile strategy for MQL4
         uses: fx31337/mql-compile-action@master
         with:
@@ -42,6 +46,8 @@ jobs:
           mt-version: 5.0.0.2361
           path: Stg_SuperTrend.mq4
           verbose: true
+      - name: Enables resource mode
+        run: echo '#define __resource__' >> config/define.h
       - name: Compile strategy for MQL5
         uses: fx31337/mql-compile-action@master
         with:
@@ -62,6 +68,10 @@ jobs:
       run:
         shell: powershell
     runs-on: windows-latest
+    strategy:
+      matrix:
+        file:
+          - SuperTrend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/checkout@v2
@@ -75,7 +85,7 @@ jobs:
           include: .
           init-platform: true
           mt-version: 5.0.0.2361
-          path: Indicators/SuperTrend.mq4
+          path: Indicators/${{ matrix.file }}.mq4
           verbose: true
       - name: Compile required indicator for MQL5
         uses: fx31337/mql-compile-action@master
@@ -83,7 +93,7 @@ jobs:
           include: .
           init-platform: true
           mt-version: 5.0.0.2515
-          path: Indicators/SuperTrend.mq5
+          path: Indicators/${{ matrix.file }}.mq5
           verbose: true
       - name: List compiled files
         run: '(Get-ChildItem -Recurse -Path . -Include *.ex[45]).fullname'
@@ -117,7 +127,7 @@ jobs:
           OptFormatBrief: true
           OptFormatJson: true
           OptVerbose: true
-          TestExpert: "Stg_SuperTrend"
+          TestExpert: Stg_SuperTrend
           TestPeriod: M1
           TestReportName: Report-${{ matrix.year }}-${{ matrix.month }}
       - name: Upload results

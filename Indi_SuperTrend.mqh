@@ -62,58 +62,32 @@ struct IndiSuperTrendParams : public IndicatorParams {
 /**
  * Implements indicator class.
  */
-class Indi_SuperTrend : public Indicator {
+class Indi_SuperTrend : public Indicator<IndiSuperTrendParams> {
  public:
-  // Structs.
-  IndiSuperTrendParams params;
-
   /**
    * Class constructor.
    */
-  Indi_SuperTrend(IndiSuperTrendParams &_p) : Indicator((IndicatorParams)_p) {}
+  Indi_SuperTrend(IndiSuperTrendParams &_p, IndicatorBase *_indi_src = NULL)
+      : Indicator<IndiSuperTrendParams>(_p, _indi_src) {}
+  Indi_SuperTrend(ENUM_TIMEFRAMES _tf = PERIOD_CURRENT) : Indicator(INDI_TMA_TRUE, _tf){};
 
   /**
    * Returns the indicator's value.
    *
    */
-  double GetValue(uint _mode, int _shift = 0) {
-    ResetLastError();
+  double GetValue(int _mode, int _shift = 0) {
     double _value = EMPTY_VALUE;
-    switch (params.idstype) {
+    switch (iparams.idstype) {
       case IDATA_ICUSTOM:
         _value = iCustom(istate.handle, Get<string>(CHART_PARAM_SYMBOL), Get<ENUM_TIMEFRAMES>(CHART_PARAM_TF),
-                         params.custom_indi_name, params.GetInpPeriod(), params.GetInpShift(), params.GetInpUseFilter(),
-                         _mode, _shift);
+                         iparams.custom_indi_name, iparams.GetInpPeriod(), iparams.GetInpShift(),
+                         iparams.GetInpUseFilter(), _mode, _shift);
         break;
       default:
         SetUserError(ERR_USER_NOT_SUPPORTED);
-        _value = EMPTY_VALUE;
+        break;
     }
-    istate.is_changed = false;
-    istate.is_ready = _LastError == ERR_NO_ERROR;
     return _value;
-  }
-
-  /**
-   * Returns the indicator's struct value.
-   */
-  IndicatorDataEntry GetEntry(int _shift = 0) {
-    long _bar_time = GetBarTime(_shift);
-    unsigned int _position;
-    IndicatorDataEntry _entry(params.max_modes);
-    if (idata.KeyExists(_bar_time, _position)) {
-      _entry = idata.GetByPos(_position);
-    } else {
-      _entry.timestamp = GetBarTime(_shift);
-      for (uint _mode = 0; _mode < (uint)params.GetMaxModes(); _mode++) {
-        _entry.values[_mode] = GetValue(_mode, _shift);
-      }
-      _entry.SetFlag(INDI_ENTRY_FLAG_IS_VALID, _entry.GetMin<double>() > 0);
-      if (_entry.IsValid()) {
-        idata.Add(_entry, _bar_time);
-      }
-    }
-    return _entry;
   }
 };
 
