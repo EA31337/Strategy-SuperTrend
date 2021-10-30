@@ -75,14 +75,9 @@ class Stg_SuperTrend : public Strategy {
 
   static Stg_SuperTrend *Init(ENUM_TIMEFRAMES _tf = NULL) {
     // Initialize strategy initial values.
-    IndiSuperTrendParams_Defaults _indi_supertrend_defaults;
-    IndiSuperTrendParams _indi_params(_indi_supertrend_defaults, _tf);
     Stg_SuperTrend_Params_Defaults stg_supertrend_defaults;
     StgParams _stg_params(stg_supertrend_defaults);
 #ifdef __config__
-    SetParamsByTf<IndiSuperTrendParams>(_indi_params, _tf, indi_supertrend_m1, indi_supertrend_m5, indi_supertrend_m15,
-                                        indi_supertrend_m30, indi_supertrend_h1, indi_supertrend_h4,
-                                        indi_supertrend_h8);
     SetParamsByTf<StgParams>(_stg_params, _tf, stg_supertrend_m1, stg_supertrend_m5, stg_supertrend_m15,
                              stg_supertrend_m30, stg_supertrend_h1, stg_supertrend_h4, stg_supertrend_h8);
 #endif
@@ -91,8 +86,16 @@ class Stg_SuperTrend : public Strategy {
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
     Strategy *_strat = new Stg_SuperTrend(_stg_params, _tparams, _cparams, "SuperTrend");
-    _strat.SetIndicator(new Indi_SuperTrend(_indi_params));
     return _strat;
+  }
+
+  /**
+   * Event on strategy's init.
+   */
+  void OnInit() {
+    IndiSuperTrendParams_Defaults _indi_supertrend_defaults;
+    IndiSuperTrendParams _indi_params(_indi_supertrend_defaults, Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF));
+    SetIndicator(new Indi_SuperTrend(_indi_params));
   }
 
   /**
