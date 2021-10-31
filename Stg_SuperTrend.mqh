@@ -26,9 +26,9 @@ INPUT float SuperTrend_OrderCloseLoss = 80;        // Order close loss
 INPUT float SuperTrend_OrderCloseProfit = 80;      // Order close profit
 INPUT int SuperTrend_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 INPUT_GROUP("SuperTrend strategy: SuperTrend indicator params");
-input uint SuperTrend_Indi_SuperTrend_InpPeriod = 14;                                  // Period
-input uint SuperTrend_Indi_SuperTrend_InpShift = 20;                                   // Shift
-input bool SuperTrend_Indi_SuperTrend_InpUseFilter = true;                             // Use filter
+INPUT uint SuperTrend_Indi_SuperTrend_InpPeriod = 14;                                  // Period
+INPUT uint SuperTrend_Indi_SuperTrend_InpShift = 20;                                   // Shift
+INPUT bool SuperTrend_Indi_SuperTrend_InpUseFilter = true;                             // Use filter
 INPUT int SuperTrend_Indi_SuperTrend_Shift = 0;                                        // Shift
 INPUT ENUM_IDATA_SOURCE_TYPE SuperTrend_Indi_SuperTrend_SourceType = IDATA_INDICATOR;  // Source type
 
