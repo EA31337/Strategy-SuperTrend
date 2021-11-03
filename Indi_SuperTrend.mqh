@@ -23,6 +23,9 @@
 #ifndef INDI_SUPERTREND_MQH
 #define INDI_SUPERTREND_MQH
 
+// Defines
+#define INDI_SUPERTREND_PATH "indicators-other\\Price"
+
 // Structs.
 
 // Defines struct to store indicator parameter values.
@@ -37,7 +40,7 @@ struct IndiSuperTrendParams : public IndicatorParams {
       : InpPeriod(_period), InpShift(_inp_shift), InpUseFilter(_use_filter) {
     max_modes = 2;
 #ifdef __resource__
-    custom_indi_name = "::Indicators\\SuperTrend";
+    custom_indi_name = "::" + INDI_SUPERTREND_PATH + "\\SuperTrend";
 #else
     custom_indi_name = "SuperTrend";
 #endif
