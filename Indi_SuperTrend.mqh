@@ -78,8 +78,9 @@ class Indi_SuperTrend : public Indicator<IndiSuperTrendParams> {
    * Returns the indicator's value.
    *
    */
-  double GetValue(int _mode, int _shift = 0) {
+  IndicatorDataEntryValue GetEntryValue(int _mode, int _shift = -1) {
     double _value = EMPTY_VALUE;
+    int _ishift = _shift >= 0 ? _shift : iparams.GetShift();
     switch (iparams.idstype) {
       case IDATA_ICUSTOM:
         _value = iCustom(istate.handle, Get<string>(CHART_PARAM_SYMBOL), Get<ENUM_TIMEFRAMES>(CHART_PARAM_TF),
