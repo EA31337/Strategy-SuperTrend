@@ -14,6 +14,7 @@ Strategy based on the SuperTrend indicator.
 |:--------:|:---------:|
 | v1.008   | v2.008    |
 | v1.009   | v2.009    |
+| v1.010   | v2.010    |
 
 <!-- Named links -->
 
