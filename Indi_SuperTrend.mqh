@@ -38,14 +38,11 @@ struct IndiSuperTrendParams : public IndicatorParams {
   IndiSuperTrendParams(uint _period = 14, uint _inp_shift = 20, bool _use_filter = 1, int _shift = 0,
                        ENUM_TIMEFRAMES _tf = PERIOD_CURRENT, ENUM_IDATA_SOURCE_TYPE _idstype = IDATA_BUILTIN)
       : InpPeriod(_period), InpShift(_inp_shift), InpUseFilter(_use_filter) {
-    max_modes = 2;
 #ifdef __resource__
     custom_indi_name = "::" + INDI_SUPERTREND_PATH + "\\SuperTrend";
 #else
     custom_indi_name = "SuperTrend";
 #endif
-    SetDataSourceType(IDATA_ICUSTOM);
-    SetDataValueType(TYPE_DOUBLE);
   };
 
   IndiSuperTrendParams(IndiSuperTrendParams &_params, ENUM_TIMEFRAMES _tf) {
@@ -70,22 +67,23 @@ class Indi_SuperTrend : public Indicator<IndiSuperTrendParams> {
   /**
    * Class constructor.
    */
-  Indi_SuperTrend(IndiSuperTrendParams &_p, IndicatorBase *_indi_src = NULL)
-      : Indicator<IndiSuperTrendParams>(_p, _indi_src) {}
+  Indi_SuperTrend(IndiSuperTrendParams &_p, ENUM_IDATA_SOURCE_TYPE _idstype = IDATA_ICUSTOM,
+                  IndicatorBase *_indi_src = NULL, int _indi_src_mode = 0)
+      : Indicator<IndiSuperTrendParams>(
+            _p, IndicatorDataParams::GetInstance(2, TYPE_DOUBLE, _idstype, IDATA_RANGE_MIXED, _indi_src_mode),
+            _indi_src) {}
   Indi_SuperTrend(ENUM_TIMEFRAMES _tf = PERIOD_CURRENT) : Indicator(INDI_TMA_TRUE, _tf){};
 
   /**
    * Returns the indicator's value.
-   *
    */
   IndicatorDataEntryValue GetEntryValue(int _mode, int _shift = -1) {
     double _value = EMPTY_VALUE;
     int _ishift = _shift >= 0 ? _shift : iparams.GetShift();
-    switch (iparams.idstype) {
+    switch (Get<ENUM_IDATA_SOURCE_TYPE>(STRUCT_ENUM(IndicatorDataParams, IDATA_PARAM_IDSTYPE))) {
       case IDATA_ICUSTOM:
-        _value = iCustom(istate.handle, Get<string>(CHART_PARAM_SYMBOL), Get<ENUM_TIMEFRAMES>(CHART_PARAM_TF),
-                         iparams.custom_indi_name, iparams.GetInpPeriod(), iparams.GetInpShift(),
-                         iparams.GetInpUseFilter(), _mode, _shift);
+        _value = iCustom(istate.handle, GetSymbol(), GetTf(), iparams.custom_indi_name, iparams.GetInpPeriod(),
+                         iparams.GetInpShift(), iparams.GetInpUseFilter(), _mode, _shift);
         break;
       default:
         SetUserError(ERR_USER_NOT_SUPPORTED);
