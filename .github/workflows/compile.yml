@@ -78,6 +78,7 @@ jobs:
           ref: v2.011
           repository: EA31337/EA31337-classes
       - name: Compile required indicator for MQL4
+        if: false
         uses: fx31337/mql-compile-action@master
         with:
           include: .
