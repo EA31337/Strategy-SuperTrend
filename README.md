@@ -13,8 +13,9 @@ Strategy based on the SuperTrend indicator.
 | Tag      | Framework |
 |:--------:|:---------:|
 | v1.008   | v2.008    |
-| v1.009   | v2.009    |
+| ...      | ...       |
 | v1.010   | v2.010    |
+| v1.011   | v2.011.1  |
 
 <!-- Named links -->
 
