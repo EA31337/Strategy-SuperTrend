@@ -2,12 +2,12 @@
 repos:
 
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.26.3
+    rev: v1.31.0
     hooks:
       - id: yamllint
 
   - repo: https://github.com/igorshubovych/markdownlint-cli.git
-    rev: v0.29.0
+    rev: v0.27.1
     hooks:
       - id: markdownlint
 
@@ -19,15 +19,14 @@ repos:
       - id: git-check     # Configure in .gitattributes
       # - id: markdownlint  # Configure in .mdlrc.style.rb
       - id: require-ascii
-        exclude: (Indicators\/.*\.mq5)$
 
   - repo: https://github.com/motet-a/jinjalint
-    rev: master
+    rev: 01e0a4d
     hooks:
       - id: jinjalint
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+    rev: v3.3.0
     hooks:
       - id: check-added-large-files
       - id: check-byte-order-marker
