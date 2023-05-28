@@ -65,7 +65,7 @@ class Stg_SuperTrend : public Strategy {
   Stg_SuperTrend(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
-  static Stg_SuperTrend *Init(ENUM_TIMEFRAMES _tf = NULL) {
+  static Stg_SuperTrend *Init(ENUM_TIMEFRAMES _tf = NULL, EA* _ea = NULL) {
     // Initialize strategy initial values.
     Stg_SuperTrend_Params_Defaults stg_supertrend_defaults;
     StgParams _stg_params(stg_supertrend_defaults);
