@@ -14,5 +14,5 @@
 
 // Load external resources.
 #ifdef __resource__
-//#resource "Indicators\\SuperTrend.ex4"
+#resource INDI_SUPERTREND_PATH + "\\SuperTrend" + MQL_EXT
 #endif

@@ -25,7 +25,7 @@
 
 // Defines
 #ifndef INDI_SUPERTREND_PATH
-#define INDI_SUPERTREND_PATH "indicators-other\\Price\\SuperTrend"
+#define INDI_SUPERTREND_PATH "indicators-other\\Price"
 #endif
 
 // Structs.
