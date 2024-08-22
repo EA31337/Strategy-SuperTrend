@@ -68,7 +68,16 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           pattern: .mt?
-      - name: Compile
+      - name: Enables input mode
+        run: echo '#define __input__' > config/define.h
+      - name: Compile indicators
+        uses: fx31337/mql-compile-action@master
+        with:
+          include: .
+          mt-path: .mt${{ matrix.version }}
+          path: indicators-other/**/*.mq${{ matrix.version }}
+          verbose: true
+      - name: Compile strategy
         uses: fx31337/mql-compile-action@master
         with:
           include: .
@@ -81,6 +90,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
+          if-no-files-found: error
           name: Strategy
           path: '**/Stg_*.ex[45]'
     strategy:
